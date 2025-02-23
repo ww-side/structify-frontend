@@ -3,6 +3,10 @@ import type { Metadata } from 'next';
 import { Titillium_Web } from 'next/font/google';
 import { HeroUIProvider } from '@heroui/system';
 
+import { ApolloProvider } from '@/core/api/apollo-provider';
+
+import { Sidebar } from '@/features/sidebar/components';
+
 import { cn } from '@/shared/lib/utils';
 
 import './globals.css';
@@ -27,8 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(titilliumWeb.variable, 'antialiased bg-background')}>
-        <Toaster position="bottom-right" />
-        <HeroUIProvider>{children}</HeroUIProvider>
+        <ApolloProvider>
+          <Toaster position="bottom-right" />
+          <HeroUIProvider>
+            <Sidebar>{children}</Sidebar>
+          </HeroUIProvider>
+        </ApolloProvider>
       </body>
     </html>
   );
