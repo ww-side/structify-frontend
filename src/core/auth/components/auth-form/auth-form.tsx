@@ -25,7 +25,11 @@ export function AuthForm() {
         offers, and be the first to hear about exciting news and updates.
       </Text>
       <section className="my-3">
-        {isSignIn ? <SignInForm /> : <SignUpForm />}
+        {isSignIn ? (
+          <SignInForm />
+        ) : (
+          <SignUpForm onSuccess={() => setIsSignIn(true)} />
+        )}
       </section>
       <Text>
         {isSignIn ? 'Don’t have an account?' : 'Already have an account?'}{' '}

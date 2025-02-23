@@ -1,16 +1,19 @@
 'use client';
 
 import { useForm } from '@/shared/lib/forms';
+import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
 import { Button } from '@/shared/ui/kit/button';
 import { Form } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
 
 import { signUpSchema } from '../../lib/sign-up.schema';
+import { signUp } from '../../services/sign-up.action';
 
-export function SignUpForm() {
+export function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
   const { Subscribe, Field, handleSubmit } = useForm({
     defaultValues: {
       username: '',
+      email: '',
       firstName: '',
       lastName: '',
       password: '',
@@ -19,7 +22,16 @@ export function SignUpForm() {
     validators: {
       onChange: signUpSchema,
     },
-    onSubmit: async ({ value }) => console.log(value),
+    onSubmit: async ({ value }) => {
+      const res = await signUp(value);
+
+      if (res?.statusCode === 200) {
+        notifySuccess(res.message);
+        onSuccess();
+      } else {
+        notifyDanger(res?.message ?? 'Try again later');
+      }
+    },
   });
 
   return (
@@ -38,6 +50,22 @@ export function SignUpForm() {
               id={field.name}
               name={field.name}
               label="Username"
+              value={String(field.state.value)}
+              onBlur={field.handleBlur}
+              onChange={e => field.handleChange(e.target.value)}
+              errorMessage={field.state.meta.errors.map(err => err?.message)}
+              isInvalid={!!field.state.meta.errors.length}
+            />
+          )}
+        </Field>
+        <Field name="email">
+          {field => (
+            <Input
+              fullWidth
+              id={field.name}
+              name={field.name}
+              label="Email"
+              type="email"
               value={String(field.state.value)}
               onBlur={field.handleBlur}
               onChange={e => field.handleChange(e.target.value)}

@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import type { Metadata } from 'next';
 import { Titillium_Web } from 'next/font/google';
 import { HeroUIProvider } from '@heroui/system';
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(titilliumWeb.variable, 'antialiased bg-background')}>
+        <Toaster position="bottom-right" />
         <HeroUIProvider>{children}</HeroUIProvider>
       </body>
     </html>
