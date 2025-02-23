@@ -3,6 +3,7 @@ import { z } from '@/shared/lib/forms';
 export const signUpSchema = z
   .object({
     username: z.string().min(3, 'Username must be at least 3 characters'),
+    email: z.string().email(),
     firstName: z.string(),
     lastName: z.string(),
     password: z.string().min(8),

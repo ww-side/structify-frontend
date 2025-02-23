@@ -1,13 +1,19 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { useForm } from '@/shared/lib/forms';
+import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
 import { Button } from '@/shared/ui/kit/button';
 import { Form } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
 
 import { signInSchema } from '../../lib/sign-in.schema';
+import { signIn } from '../../services/sign-in.action';
 
 export function SignInForm() {
+  const router = useRouter();
+
   const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues: {
       username: '',
@@ -16,7 +22,16 @@ export function SignInForm() {
     validators: {
       onChange: signInSchema,
     },
-    onSubmit: async ({ value }) => console.log(value),
+    onSubmit: async ({ value }) => {
+      const res = await signIn(value);
+
+      if (res?.statusCode === 200) {
+        notifySuccess(res.message);
+        router.push('/');
+      } else {
+        notifyDanger(res?.message ?? 'Try again later');
+      }
+    },
   });
 
   return (
