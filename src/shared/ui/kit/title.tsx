@@ -1,6 +1,6 @@
 'use client';
 
-import { JSX, ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 
 const titleStyles: Record<number, string> = {
   1: 'text-[2.375rem] font-semibold',

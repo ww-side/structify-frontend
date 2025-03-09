@@ -4,7 +4,7 @@ import { cookies as nextCookies } from 'next/headers';
 
 import { secureFetch } from '@/shared/lib/network';
 
-import { UserEntity } from '../lib/user.entity';
+import { type UserEntity } from '../lib/user.entity';
 
 export async function getMe() {
   const cookies = await nextCookies();

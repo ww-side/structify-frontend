@@ -1,13 +1,12 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { type ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import { useQuery } from '@apollo/client';
 
 import { ViewInfo } from '@/features/sidebar/components/view-info';
 
-import { HeartCrack, ScanEye, Settings, useIcon } from '@/shared/ui/icons';
-import { IconName } from '@/shared/ui/icons/types';
+import { HeartCrack, type IconName, Settings } from '@/shared/ui/icons';
 import { Text } from '@/shared/ui/kit/text';
 import { Title } from '@/shared/ui/kit/title';
 
@@ -16,7 +15,6 @@ import { UserInfo } from './user-info';
 
 export function Sidebar({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
 
   const { data, loading, error } = useQuery<{
     views: { name: string; id: string; icon: IconName }[];

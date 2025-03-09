@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { from, HttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { Observable } from '@apollo/client/utilities';

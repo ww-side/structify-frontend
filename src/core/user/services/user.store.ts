@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { UserEntity } from '@/core/user/lib';
+import { type UserEntity } from '@/core/user/lib';
 
 type UserState = {
   user: UserEntity | null;

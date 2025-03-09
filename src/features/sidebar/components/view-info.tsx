@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { ScanEye, useIcon } from '@/shared/ui/icons';
+import { type IconName, ScanEye, useIcon } from '@/shared/ui/icons';
 import { Text } from '@/shared/ui/kit/text';
 
 export function ViewInfo({
@@ -12,7 +12,7 @@ export function ViewInfo({
 }: {
   id: string;
   name: string;
-  icon: string;
+  icon: IconName;
 }) {
   const router = useRouter();
 

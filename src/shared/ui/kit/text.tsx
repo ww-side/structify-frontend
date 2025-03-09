@@ -1,7 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { cva, VariantProps } from 'class-variance-authority';
+import { type ReactNode } from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/shared/lib/utils';
 
