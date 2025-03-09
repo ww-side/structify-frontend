@@ -12,6 +12,12 @@ export default {
         primary: 'var(--primary-color)',
         'primary-dark': 'var(--primary-dark-color)',
         background: 'var(--background)',
+        secondary: 'var(--secondary-color)',
+        'primary-text': 'var(--primary-text-color)',
+        'inverted-text': 'var(--inverted-text-color)',
+      },
+      backgroundImage: {
+        noise: 'var(--bg-noise)',
       },
     },
   },

@@ -1,32 +1,60 @@
 'use client';
 
 import { ReactNode } from 'react';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useQuery } from '@apollo/client';
 
-import { Button } from '@/shared/ui/kit/button';
+import { ViewInfo } from '@/features/sidebar/components/view-info';
 
-import { Navigation } from './navigation';
+import { HeartCrack, ScanEye, Settings, useIcon } from '@/shared/ui/icons';
+import { IconName } from '@/shared/ui/icons/types';
+import { Text } from '@/shared/ui/kit/text';
+import { Title } from '@/shared/ui/kit/title';
+
+import { GET_VIEWS } from '../services/views.query';
 import { UserInfo } from './user-info';
 
 export function Sidebar({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const { data, loading, error } = useQuery<{
+    views: { name: string; id: string; icon: IconName }[];
+  }>(GET_VIEWS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) {
+    console.log(error);
+  }
 
   return pathname !== '/auth' ? (
     <div className="flex gap-4 p-4">
-      <section className="bg-primary-dark w-[250px] h-[96.8vh] sticky rounded-2xl p-3 text-white flex flex-col">
-        <div className="flex items-center justify-center mb-4">
-          <Image src="/logo.svg" alt="logo" width={58} height={65} priority />
-        </div>
-        <Navigation />
-        <div className="mt-auto flex items-center justify-between">
+      <section className="w-[250px] h-[96vh] sticky flex flex-col gap-3">
+        <section className="p-3 bg-primary-dark rounded-2xl text-white">
           <UserInfo />
-          <Button color="danger" size="sm">
+        </section>
+        <section className="p-3 bg-primary-dark rounded-2xl text-white">
+          <Title level={5}>Views</Title>
+          <ul className="mt-5">
+            {data?.views.map(item => <ViewInfo key={item.id} {...item} />)}
+          </ul>
+        </section>
+        <button className="p-3 bg-primary-dark rounded-2xl flex items-center gap-3">
+          <Settings size="14" color="white" />
+          <Text color="white" weight="semibold">
+            Settings
+          </Text>
+        </button>
+        <button className="p-3 bg-primary-dark rounded-2xl flex items-center gap-3">
+          <HeartCrack size={14} color="white" />
+          <Text color="white" weight="semibold">
             Log Out
-          </Button>
-        </div>
+          </Text>
+        </button>
       </section>
-      {children}
+      <main className="bg-secondary w-full rounded-2xl p-2 border-1">
+        {children}
+      </main>
     </div>
   ) : (
     children

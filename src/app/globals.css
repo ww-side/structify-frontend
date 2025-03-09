@@ -7,12 +7,22 @@ body {
 }
 
 :root {
+  --primary-text-color: #000000;
+  --inverted-text-color: #FFFFFF;
+
   --primary-color: #9353D3;
   --primary-dark-color: #180828;
-  --background: #FFFFFF;
+  --secondary-color: #ffffff;
+
+  --bg-noise: url('/light-noise.png');
 }
 
 [data-theme="dark"] {
+  --primary-text-color: #FFFFFF;
+  --inverted-text-color: #000000;
+
   --primary-color: #180828;
-  --background: #D2D2D2;
+  --secondary-color: #131313;
+
+  --bg-noise: url('/dark-noise.png');
 }

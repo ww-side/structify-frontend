@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui/kit/button';
 
 const routes = [
+  { name: 'Home', link: '/' },
   { name: 'Views', link: '/views' },
   { name: 'Calendar', link: '/calendar' },
   { name: 'Settings', link: '/settings' },

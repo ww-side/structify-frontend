@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-import { refreshToken } from '@/core/auth/services/refresh-token.action';
+import { refreshToken } from '@/core/auth/services';
 
 export async function secureFetch(url: string, options: RequestInit = {}) {
   const cookiesStore = await cookies();

@@ -6,8 +6,8 @@ import { Button } from '@/shared/ui/kit/button';
 import { Form } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
 
-import { signUpSchema } from '../../lib/sign-up.schema';
-import { signUp } from '../../services/sign-up.action';
+import { signUpSchema } from '../../lib';
+import { signUp } from '../../services';
 
 export function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
   const { Subscribe, Field, handleSubmit } = useForm({

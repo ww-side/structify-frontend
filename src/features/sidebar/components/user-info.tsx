@@ -1,36 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { User } from '@heroui/user';
+import { useEffect } from 'react';
 
-import { UserEntity } from '@/core/user/lib/user.entity';
-import { getMe } from '@/core/user/services/get-me.action';
+import { useUserStore } from '@/core/user/services';
+
+import { User } from '@/shared/ui/kit/user';
+
+import { getUserHandler, userDataMapping } from '../utils/user-data';
 
 export function UserInfo() {
-  const [user, setUser] = useState<UserEntity | null>(null);
+  const { user, setUser } = useUserStore();
 
   useEffect(() => {
-    async function fetchUser() {
-      const userRes = await getMe();
-      if (userRes?.statusCode === 200) {
-        setUser(userRes.data);
-      }
-    }
-    fetchUser();
-  }, []);
+    getUserHandler(setUser).catch(console.error);
+  }, [setUser]);
 
-  const firstName = user?.firstName;
-  const username = user?.username;
-  const avatarName = firstName
-    ? firstName.charAt(0).toUpperCase()
-    : username?.charAt(0).toUpperCase();
-
-  console.log(user);
+  const { firstName, username, initials } = userDataMapping(user);
 
   return (
     <User
       name={firstName ?? username}
-      avatarProps={{ name: avatarName, size: 'sm' }}
+      avatarProps={{ name: initials, size: 'sm' }}
     />
   );
 }

@@ -11,14 +11,13 @@ import {
 } from '@apollo/experimental-nextjs-app-support';
 import { getCookie } from 'cookies-next/client';
 
-import { refreshToken } from '@/core/auth/services/refresh-token.action';
+import { refreshToken } from '@/core/auth/services';
 
 const client = () => {
   const token = getCookie('accessToken');
 
   const httpLink = new HttpLink({
     uri: 'http://localhost:8000/graphql',
-    fetchOptions: { cache: 'no-store' },
     headers: {
       Authorization: `Bearer ${token}`,
     },
