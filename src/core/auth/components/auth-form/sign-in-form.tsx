@@ -8,8 +8,8 @@ import { Button } from '@/shared/ui/kit/button';
 import { Form } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
 
-import { signInSchema } from '../../lib/sign-in.schema';
-import { signIn } from '../../services/sign-in.action';
+import { signInSchema } from '../../lib';
+import { signIn } from '../../services';
 
 export function SignInForm() {
   const router = useRouter();

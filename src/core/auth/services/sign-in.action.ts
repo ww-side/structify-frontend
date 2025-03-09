@@ -34,7 +34,7 @@ export async function signIn(args: { username: string; password: string }) {
         });
 
         cookie.set('accessToken', accessToken, {
-          httpOnly: true,
+          httpOnly: false,
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'lax',
           path: '/',

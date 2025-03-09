@@ -13,7 +13,7 @@ export function AuthForm() {
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
   return (
-    <section className="bg-white w-full rounded-md px-[10%]">
+    <section className="w-full rounded-md px-[10%]">
       <Logo />
       <Title>
         {isSignIn

@@ -1,8 +1,9 @@
-import { cookies } from 'next/headers';
+import { Greeting } from '@/widgets/home';
 
 export default async function Home() {
-  const serverCookies = await cookies();
-  console.log('Server Cookies:', serverCookies.getAll());
-
-  return <main>App</main>;
+  return (
+    <>
+      <Greeting />
+    </>
+  );
 }
