@@ -1,7 +1,11 @@
 'use client';
 
-import toast from 'react-hot-toast';
+import { addToast } from '@heroui/toast';
 
-export const notifySuccess = (message: string) => toast.success(message);
+export { Toast, ToastProvider } from '@heroui/toast';
 
-export const notifyDanger = (message: string) => toast.error(message);
+export const notifySuccess = (msg: string) =>
+  addToast({ title: msg, color: 'success' });
+
+export const notifyDanger = (msg: string) =>
+  addToast({ title: msg, color: 'danger' });

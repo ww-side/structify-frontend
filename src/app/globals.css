@@ -10,8 +10,7 @@ body {
   --primary-text-color: #000000;
   --inverted-text-color: #FFFFFF;
 
-  --primary-color: #9353D3;
-  --primary-dark-color: #180828;
+  --primary-color: #7c5e91;
   --secondary-color: #ffffff;
 
   --bg-noise: url('/light-noise.png');
@@ -21,7 +20,6 @@ body {
   --primary-text-color: #FFFFFF;
   --inverted-text-color: #000000;
 
-  --primary-color: #180828;
   --secondary-color: #131313;
 
   --bg-noise: url('/dark-noise.png');

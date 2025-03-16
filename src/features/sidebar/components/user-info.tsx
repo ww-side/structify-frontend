@@ -20,7 +20,7 @@ export function UserInfo() {
   return (
     <User
       name={firstName ?? username}
-      avatarProps={{ name: initials, size: 'sm' }}
+      avatarProps={{ name: initials, size: 'sm', color: 'primary' }}
     />
   );
 }

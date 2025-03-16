@@ -4,10 +4,11 @@ import { Titillium_Web } from 'next/font/google';
 import { HeroUIProvider } from '@heroui/system';
 
 import { ApolloProvider } from '@/core/api/apollo-provider';
+import { AuthGuard } from '@/core/auth/components/auth-guard';
 
-import { Sidebar } from '@/features/sidebar/components';
-
+import { ToastProvider } from '@/shared/lib/toast';
 import { cn } from '@/shared/lib/utils';
+import { Dialog } from '@/shared/ui/kit/dialog';
 
 import './globals.css';
 
@@ -33,8 +34,10 @@ export default function RootLayout({
       <body className={cn(titilliumWeb.variable, 'antialiased bg-noise')}>
         <ApolloProvider>
           <Toaster position="bottom-right" />
+          <ToastProvider placement="bottom-right" />
           <HeroUIProvider>
-            <Sidebar>{children}</Sidebar>
+            <AuthGuard>{children}</AuthGuard>
+            <Dialog />
           </HeroUIProvider>
         </ApolloProvider>
       </body>
