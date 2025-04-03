@@ -11,6 +11,7 @@ body {
   --inverted-text-color: #FFFFFF;
 
   --primary-color: #7c5e91;
+  --primary-border-color: #7c5e91;
   --secondary-color: #ffffff;
 
   --bg-noise: url('/light-noise.png');

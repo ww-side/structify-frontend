@@ -7,7 +7,7 @@ export async function refreshToken() {
   const refreshToken = cookiesStore.get('refreshToken');
 
   if (!refreshToken) {
-    console.log('Refresh token is missing');
+    console.error('Refresh token is missing');
     return;
   }
 

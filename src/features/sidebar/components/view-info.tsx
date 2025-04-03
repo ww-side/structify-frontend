@@ -22,7 +22,7 @@ export function ViewInfo({
     <li
       key={id}
       className="cursor-pointer flex items-center gap-3"
-      onClick={() => router.push(`/view/${id}`)}
+      onClick={() => router.push(`/views/${id}`)}
     >
       {Icon ? <Icon size={14} /> : <ScanEye size="14" />}
       <Text>{name}</Text>

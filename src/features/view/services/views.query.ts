@@ -9,3 +9,12 @@ export const GET_VIEWS = gql`
     }
   }
 `;
+
+export const GET_VIEW = gql`
+  query GetView($id: String!) {
+    view(id: $id) {
+      name
+      icon
+    }
+  }
+`;
