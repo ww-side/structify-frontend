@@ -7,13 +7,18 @@ import { useQuery } from '@apollo/client';
 import { logout, useUserStore } from '@/core/user/services';
 
 import { ViewInfo } from '@/features/sidebar/components/view-info';
+import { GET_VIEWS } from '@/features/view/services';
 
 import { HeartCrack, type IconName, Settings } from '@/shared/ui/icons';
+import { Skeleton } from '@/shared/ui/kit/skeleton';
 import { Text } from '@/shared/ui/kit/text';
 import { Title } from '@/shared/ui/kit/title';
 
-import { GET_VIEWS } from '../services/views.query';
 import { UserInfo } from './user-info';
+
+const skeletons = Array.from({ length: 5 }, (_, i) => (
+  <Skeleton key={i} width={150} height={20} />
+));
 
 export function Sidebar({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -24,7 +29,6 @@ export function Sidebar({ children }: { children: ReactNode }) {
     views: { name: string; id: string; icon: IconName }[];
   }>(GET_VIEWS);
 
-  if (loading) return <p>Loading...</p>;
   if (error) {
     console.error(error);
   }
@@ -37,14 +41,16 @@ export function Sidebar({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex gap-4 p-4">
-      <section className="w-[250px] h-[96vh] sticky flex flex-col gap-3">
+      <section className="w-[250px] h-[96.5vh] sticky flex flex-col gap-3">
         <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
           <UserInfo />
         </section>
         <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
           <Title level={5}>Views</Title>
           <ul className="mt-5 flex flex-col gap-1.5">
-            {data?.views.map(item => <ViewInfo key={item.id} {...item} />)}
+            {loading
+              ? skeletons
+              : data?.views.map(item => <ViewInfo key={item.id} {...item} />)}
           </ul>
         </section>
         <button className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border">

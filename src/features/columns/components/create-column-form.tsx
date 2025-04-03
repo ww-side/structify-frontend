@@ -1,8 +1,6 @@
 'use client';
 
-import { ApolloError, useMutation } from '@apollo/client';
-
-import { GET_VIEWS } from '@/features/view/services/views.query';
+import { createColumn } from '@/features/columns/services';
 
 import { useForm } from '@/shared/lib/forms';
 import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
@@ -10,53 +8,42 @@ import { Button } from '@/shared/ui/kit/button';
 import { Form } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
 
-import { createViewSchema } from '../lib/schemas';
-import { CREATE_VIEW_MUTATION } from '../services';
-import { ViewFormatsSelect } from './view-formats-select';
-import { ViewIconsSelect } from './view-icons-select';
+import { createColumnSchema } from '../lib';
+import { ColumnDataTypeSelect } from './column-data-type-select';
 
-export function CreateViewForm({
-  onAfterSubmit,
+export function CreateColumnForm({
+  viewId,
+  onClose,
 }: {
-  onAfterSubmit?: () => void;
+  onClose: () => void;
+  viewId: string;
 }) {
-  const [createView] = useMutation(CREATE_VIEW_MUTATION, {
-    refetchQueries: [{ query: GET_VIEWS }],
-  });
-
   const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues: {
       name: '',
-      formats: ['table'],
-      icon: '',
+      dataType: '',
     },
     validators: {
-      onChange: createViewSchema,
+      onChange: createColumnSchema,
     },
     onSubmit: async data => {
       try {
-        await createView({
-          variables: {
-            createViewInput: {
-              name: data.value.name,
-              formats: data.value.formats,
-              icon: data.value.icon,
-            },
-          },
+        await createColumn({
+          viewId,
+          dataType: data.value.dataType,
+          name: data.value.name,
         });
-        notifySuccess('View created');
+        notifySuccess(`Column ${data.value.name} created`);
+        onClose?.();
       } catch (error) {
-        if (error instanceof ApolloError) {
-          const errorMessage =
-            error.message ||
-            'An unknown error occurred while creating the view.';
-          notifyDanger(errorMessage);
-        } else {
-          console.error('Error creating view:', error);
-          notifyDanger('An unknown error occurred while creating the view.');
+        let errorMessage =
+          'An unknown error occurred while creating the column.';
+
+        if (error instanceof Error) {
+          errorMessage = error.message;
         }
-      } finally {
-        onAfterSubmit?.();
+
+        notifyDanger(errorMessage);
       }
     },
   });
@@ -86,19 +73,9 @@ export function CreateViewForm({
             />
           )}
         </Field>
-        <Field name="formats">
+        <Field name="dataType">
           {field => (
-            <ViewFormatsSelect
-              value={field.state.value}
-              onChange={newValue => field.handleChange(newValue)}
-              errorMessage={field.state.meta.errors.map(err => err?.message)}
-              isInvalid={!!field.state.meta.errors.length}
-            />
-          )}
-        </Field>
-        <Field name="icon">
-          {field => (
-            <ViewIconsSelect
+            <ColumnDataTypeSelect
               value={field.state.value}
               onChange={newValue => field.handleChange(newValue)}
               errorMessage={field.state.meta.errors.map(err => err?.message)}
@@ -110,7 +87,7 @@ export function CreateViewForm({
       <Subscribe selector={state => [state.canSubmit, state.isSubmitting]}>
         {([canSubmit, isSubmitting]) => (
           <Button type="submit" disabled={!canSubmit} color="primary" fullWidth>
-            {isSubmitting ? '...' : 'Create'}
+            {isSubmitting ? 'Creating...' : 'Create'}
           </Button>
         )}
       </Subscribe>

@@ -1,9 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useApolloClient } from '@apollo/client';
+import { setCookie } from 'cookies-next/client';
 
 import { useForm } from '@/shared/lib/forms';
-import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
+import { notifyDanger } from '@/shared/lib/toast';
 import { Button } from '@/shared/ui/kit/button';
 import { Form } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
@@ -13,6 +15,7 @@ import { signIn } from '../../services';
 
 export function SignInForm() {
   const router = useRouter();
+  const apolloClient = useApolloClient();
 
   const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues: {
@@ -26,7 +29,8 @@ export function SignInForm() {
       const res = await signIn(value);
 
       if (res?.statusCode === 200) {
-        notifySuccess(res.message);
+        setCookie('accessToken', res?.data?.accessToken);
+        await apolloClient.resetStore();
         router.push('/');
       } else {
         notifyDanger(res?.message ?? 'Try again later');

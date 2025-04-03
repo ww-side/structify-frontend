@@ -1,7 +1,7 @@
 'use client';
 
 import { type PropsWithChildren } from 'react';
-import { from, HttpLink } from '@apollo/client';
+import { ApolloLink, from, HttpLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { Observable } from '@apollo/client/utilities';
 import {
@@ -13,14 +13,22 @@ import { getCookie } from 'cookies-next/client';
 
 import { refreshToken } from '@/core/auth/services';
 
-const client = () => {
+const authLink = new ApolloLink((operation, forward) => {
   const token = getCookie('accessToken');
 
+  operation.setContext(({ headers = {} }) => ({
+    headers: {
+      ...headers,
+      Authorization: token ? `Bearer ${token}` : '',
+    },
+  }));
+
+  return forward(operation);
+});
+
+const client = () => {
   const httpLink = new HttpLink({
     uri: 'http://localhost:8000/graphql',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   });
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
@@ -57,7 +65,7 @@ const client = () => {
 
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: from([errorLink, httpLink]),
+    link: from([authLink, errorLink, httpLink]),
   });
 };
 
