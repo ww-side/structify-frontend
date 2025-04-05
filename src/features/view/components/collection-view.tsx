@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs';
 import { Pagination } from '@heroui/pagination';
 
 import type { Column } from '@/features/columns/lib';

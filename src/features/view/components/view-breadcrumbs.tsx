@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs';
+
+import { BreadcrumbItem, Breadcrumbs } from '@/shared/ui/kit/breadcrumbs';
 
 export function ViewBreadcrumbs({ id }: { id: string }) {
   return (
