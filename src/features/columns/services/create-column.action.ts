@@ -3,13 +3,16 @@
 import { cookies } from 'next/headers';
 
 type CreateColumnReponse = {
-  name: string;
-  dataType: string;
-  viewId: string;
-  userId: string;
-  id: string;
-  createdAt: string;
-  updatedAt: string;
+  statusCode: number;
+  data: {
+    name: string;
+    dataType: string;
+    viewId: string;
+    userId: string;
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 };
 
 export async function createColumn(args: {

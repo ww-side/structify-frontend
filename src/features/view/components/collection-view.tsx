@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation';
 import { Pagination } from '@heroui/pagination';
 
 import type { Column } from '@/features/columns/lib';
+import {
+  initColumns,
+  useColumnStore,
+} from '@/features/columns/services/columns.store';
 import type { RowValue } from '@/features/row-value/lib';
 import { initializeRows, useRowsStore } from '@/features/rows/services';
 import { useViewFormatStore } from '@/features/view/services';
@@ -30,18 +34,22 @@ export function CollectionView({
   pageSize: number;
   totalPages: number;
 }) {
-  useEffect(() => initializeRows(rows), [rows]);
+  useEffect(() => {
+    initializeRows(rows);
+    initColumns(columns);
+  }, [rows, columns]);
 
   const router = useRouter();
 
   const { data } = useRowsStore();
+  const { columns: cols } = useColumnStore();
   const { activeView } = useViewFormatStore();
 
   return (
     <section>
       <ViewHeader viewId={viewId} />
       <TableView
-        columns={columns}
+        columns={cols}
         rows={data}
         viewId={viewId}
         rowValues={rowValues}

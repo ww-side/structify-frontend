@@ -21,7 +21,7 @@ export default async function View({
   const { pageSize: paramsPageSize, page: paramsPage } = await searchParams;
 
   const page = Number(paramsPage ?? 1);
-  const pageSize = Number(paramsPageSize ?? 2);
+  const pageSize = Number(paramsPageSize ?? 10);
 
   const res = await getData({ id: slug, page, pageSize });
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { createColumn } from '@/features/columns/services';
+import { useColumnStore } from '@/features/columns/services/columns.store';
 
 import { useForm } from '@/shared/lib/forms';
 import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
@@ -18,6 +19,8 @@ export function CreateColumnForm({
   onClose: () => void;
   viewId: string;
 }) {
+  const { create } = useColumnStore();
+
   const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues: {
       name: '',
@@ -28,10 +31,16 @@ export function CreateColumnForm({
     },
     onSubmit: async data => {
       try {
-        await createColumn({
+        const { data: res } = await createColumn({
           viewId,
           dataType: data.value.dataType,
           name: data.value.name,
+        });
+        create({
+          name: res.name,
+          dataType: res.dataType,
+          id: res.id,
+          key: res.name,
         });
         notifySuccess(`Column ${data.value.name} created`);
         onClose?.();
