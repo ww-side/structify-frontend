@@ -4,9 +4,11 @@ import { useCallback } from 'react';
 
 import { CreateColumnForm } from '@/features/columns/components/create-column-form';
 import { createNewRow } from '@/features/rows/services';
+import { ViewFormat } from '@/features/view/components/view-format';
 import { useGetView } from '@/features/view/hooks';
 
 import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
+import { Columns2, Rows2 } from '@/shared/ui/icons';
 import { Eye, useIcon } from '@/shared/ui/icons';
 import { Button } from '@/shared/ui/kit/button';
 import { useDialogStore } from '@/shared/ui/kit/dialog';
@@ -16,6 +18,8 @@ import { Title } from '@/shared/ui/kit/title';
 export function ViewHeader({ viewId }: { viewId: string }) {
   const { open, registerContent, close } = useDialogStore();
   const { data, loading, error } = useGetView(viewId);
+
+  console.log('@data', data);
 
   if (error) {
     console.error(error);
@@ -47,13 +51,27 @@ export function ViewHeader({ viewId }: { viewId: string }) {
         <Skeleton width={170} height={30} />
       ) : (
         <section className="flex items-center gap-3">
-          <Title level={4}>{data?.view?.name}</Title>
-          {Icon ? <Icon size={18} /> : <Eye size={18} />}
+          <div className="flex items-center gap-1">
+            {Icon ? <Icon size={18} /> : <Eye size={18} />}
+            <Title level={4}>{data?.view?.name}</Title>
+          </div>
+          <ViewFormat formats={data?.view.formats} />
         </section>
       )}
       <section className="flex items-center gap-3">
-        <Button onPress={openDialogHandler}>Create Column</Button>
-        <Button onPress={createRowHandler}>Create new row</Button>
+        <Button
+          size="sm"
+          variant="bordered"
+          color="primary"
+          onPress={createRowHandler}
+        >
+          <Rows2 size={14} />
+          Create Row
+        </Button>
+        <Button size="sm" color="primary" onPress={openDialogHandler}>
+          <Columns2 size={14} />
+          Create Column
+        </Button>
       </section>
     </header>
   );

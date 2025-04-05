@@ -6,6 +6,9 @@ export const Button = extendVariants(Btn, {
     color: {
       primary: 'text-white bg-primary',
     },
+    variant: {
+      bordered: 'text-primary-text bg-transparent border-2 border-primary',
+    },
     isDisabled: {
       true: 'bg-[#eaeaea] text-[#000] opacity-50 cursor-not-allowed',
     },

@@ -15,6 +15,7 @@ export const GET_VIEW = gql`
     view(id: $id) {
       name
       icon
+      formats
     }
   }
 `;

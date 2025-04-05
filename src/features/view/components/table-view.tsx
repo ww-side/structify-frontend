@@ -22,11 +22,13 @@ export function TableView({
   rows,
   viewId,
   rowValues,
+  makeList = false,
 }: {
   columns: Column[];
   rows: Record<string, string>[];
   viewId: string;
   rowValues: RowValue[];
+  makeList?: boolean;
 }) {
   const extendedColumns = useMemo(
     () => [...columns, { key: 'actions', name: '' }],
@@ -34,7 +36,7 @@ export function TableView({
   );
 
   return (
-    <Table>
+    <Table isStriped={makeList} hideHeader={makeList}>
       <TableHeader columns={extendedColumns}>
         {column => <TableColumn key={column.key}>{column.name}</TableColumn>}
       </TableHeader>
