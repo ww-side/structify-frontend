@@ -1,6 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@apollo/client';
 
@@ -41,12 +42,14 @@ export function Sidebar({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex gap-4 p-4">
-      <section className="w-[250px] h-[96.5vh] sticky flex flex-col gap-3">
+      <section className="w-[250px] h-[96.4vh] sticky flex flex-col gap-3">
         <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
           <UserInfo />
         </section>
         <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
-          <Title level={5}>Views</Title>
+          <Link href="/views">
+            <Title level={5}>Views</Title>
+          </Link>
           <ul className="mt-5 flex flex-col gap-1.5">
             {loading
               ? skeletons
@@ -65,7 +68,7 @@ export function Sidebar({ children }: { children: ReactNode }) {
           <Text weight="semibold">Log Out</Text>
         </button>
       </section>
-      <main className="bg-secondary w-full rounded-2xl p-2 border">
+      <main className="bg-secondary w-full rounded-2xl p-4 border">
         {children}
       </main>
     </div>

@@ -22,18 +22,16 @@ export async function getData({
   id,
   page = 1,
   pageSize = 10,
-  limit = 15,
 }: {
   id: string;
   page?: number;
   pageSize?: number;
-  limit?: number;
 }) {
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
 
   const res = await fetch(
-    `${process.env.SERVER_URL}/view-data/?viewId=${id}&page=${page}&page_size=${pageSize}&limit=${limit}`,
+    `${process.env.SERVER_URL}/view-data/?viewId=${id}&page=${page}&page_size=${pageSize}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
