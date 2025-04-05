@@ -1,10 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
+import { ColumnEditDialog } from '@/features/columns/components';
 import type { Column } from '@/features/columns/lib';
 import type { RowValue } from '@/features/row-value/lib';
 
+import { Edit } from '@/shared/ui/icons';
+import { useDialogStore } from '@/shared/ui/kit/dialog';
 import {
   getKeyValue,
   Table,
@@ -30,15 +33,42 @@ export function TableView({
   rowValues: RowValue[];
   makeList?: boolean;
 }) {
+  const { open, registerContent } = useDialogStore();
+
   const extendedColumns = useMemo(
-    () => [...columns, { key: 'actions', name: '' }],
+    () => [
+      ...columns,
+      { id: 'actions', key: 'actions', name: '', dataType: 'text' },
+    ],
     [columns],
+  );
+
+  const handleEditColumn = useCallback(
+    (column: Column) => {
+      registerContent({
+        title: 'Edit Column',
+        content: <ColumnEditDialog value={column} />,
+      });
+      open();
+    },
+    [registerContent, open],
   );
 
   return (
     <Table isStriped={makeList} hideHeader={makeList}>
       <TableHeader columns={extendedColumns}>
-        {column => <TableColumn key={column.key}>{column.name}</TableColumn>}
+        {column => (
+          <TableColumn key={column.key}>
+            <div className="flex items-center gap-2">
+              {column.name}
+              {column.key !== 'actions' && (
+                <button onClick={() => handleEditColumn(column)}>
+                  <Edit size={14} />
+                </button>
+              )}
+            </div>
+          </TableColumn>
+        )}
       </TableHeader>
       <TableBody items={rows}>
         {item => (

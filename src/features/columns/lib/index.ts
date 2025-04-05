@@ -1,3 +1,3 @@
-export * from './create-column.schema';
+export * from './schemas';
 export * from './types';
 export * from './utils';
