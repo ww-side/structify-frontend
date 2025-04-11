@@ -19,3 +19,14 @@ export const GET_VIEW = gql`
     }
   }
 `;
+
+export const GET_FULL_VIEWS = gql`
+  query {
+    views {
+      id
+      name
+      icon
+      formats
+    }
+  }
+`;

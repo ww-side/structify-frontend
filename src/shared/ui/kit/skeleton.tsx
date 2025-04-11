@@ -10,7 +10,7 @@ export function Skeleton({
   return (
     <div className="animate-pulse">
       <div
-        className="bg-gray-200 rounded-sm"
+        className="bg-gray-200 rounded-xl"
         style={{ width: `${width}px`, height: `${height}px` }}
       />
     </div>
