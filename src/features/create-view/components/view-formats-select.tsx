@@ -22,6 +22,8 @@ export function ViewFormatsSelect({
     onChange(selectedValues);
   };
 
+  console.log('value', value);
+
   return (
     <Select
       className="w-full"
@@ -29,6 +31,7 @@ export function ViewFormatsSelect({
       size="sm"
       placeholder="Select formats"
       selectionMode="multiple"
+      selectedKeys={value}
       value={value}
       onChange={handleSelectChange}
       errorMessage={errorMessage}

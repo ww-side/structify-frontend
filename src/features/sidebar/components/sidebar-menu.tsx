@@ -9,7 +9,7 @@ import { logout, useUserStore } from '@/core/user/services';
 import { ViewInfo } from '@/features/sidebar/components/view-info';
 import { GET_VIEWS } from '@/features/view/services';
 
-import type { IconName} from '@/shared/ui/icons';
+import type { IconName } from '@/shared/ui/icons';
 import { HeartCrack, Settings } from '@/shared/ui/icons';
 import { Skeleton } from '@/shared/ui/kit/skeleton';
 import { Text } from '@/shared/ui/kit/text';
@@ -44,7 +44,6 @@ export function SidebarMenu() {
       <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
         <UserInfo />
       </section>
-
       <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
         <Link href="/views">
           <Title level={5}>Views</Title>
@@ -55,12 +54,10 @@ export function SidebarMenu() {
             : data?.views.map(item => <ViewInfo key={item.id} {...item} />)}
         </ul>
       </section>
-
       <button className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border">
         <Settings size="14" />
         <Text weight="semibold">Settings</Text>
       </button>
-
       <button
         className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border"
         onClick={logoutHandler}

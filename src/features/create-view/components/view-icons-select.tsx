@@ -23,7 +23,7 @@ export function ViewIconsSelect({
       size="sm"
       placeholder="Select icon"
       selectionMode="single"
-      value={value}
+      selectedKeys={[value]}
       onChange={e => onChange(e.target.value)}
       errorMessage={errorMessage}
       isInvalid={isInvalid}
