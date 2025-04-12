@@ -5,9 +5,11 @@ import { cookies } from 'next/headers';
 export async function updateColumn({
   id,
   name,
+  variants,
 }: {
   id: string;
   name?: string;
+  variants?: string[];
 }) {
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
@@ -18,7 +20,7 @@ export async function updateColumn({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ name, variants }),
   });
 
   return await res.json();

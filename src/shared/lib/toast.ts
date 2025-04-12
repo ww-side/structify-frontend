@@ -9,3 +9,6 @@ export const notifySuccess = (msg: string) =>
 
 export const notifyDanger = (msg: string) =>
   addToast({ title: msg, color: 'danger' });
+
+export const notifyInfo = (msg: string) =>
+  addToast({ title: msg, color: 'default' });

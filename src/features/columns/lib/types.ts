@@ -3,4 +3,5 @@ export type Column = {
   name: string;
   dataType: string;
   id: string;
+  variants: string[];
 };

@@ -6,5 +6,6 @@ export const columnsMapping = (columns: Record<string, string>[]): Column[] => {
     key: column.name.toLowerCase(),
     name: column.name,
     dataType: column.dataType,
+    variants: column.variants ?? [],
   }));
 };
