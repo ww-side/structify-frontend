@@ -22,8 +22,6 @@ export function ViewFormatsSelect({
     onChange(selectedValues);
   };
 
-  console.log('value', value);
-
   return (
     <Select
       className="w-full"

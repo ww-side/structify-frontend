@@ -7,4 +7,5 @@ export const createColumnSchema = z.object({
 
 export const updateColumnSchema = z.object({
   name: z.string().min(3).max(50).nonempty('Please provide a name'),
+  variants: z.array(z.string()),
 });

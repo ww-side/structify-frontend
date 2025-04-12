@@ -7,6 +7,7 @@ import type { Column } from '@/features/columns/lib';
 import type { RowValue } from '@/features/row-value/lib';
 
 import { Edit } from '@/shared/ui/icons';
+import { Chip } from '@/shared/ui/kit/chip';
 import { useDialogStore } from '@/shared/ui/kit/dialog';
 import {
   getKeyValue,
@@ -38,7 +39,7 @@ export function TableView({
   const extendedColumns = useMemo(
     () => [
       ...columns,
-      { id: 'actions', key: 'actions', name: '', dataType: 'text' },
+      { id: 'actions', key: 'actions', name: '', dataType: 'text', variants: [] },
     ],
     [columns],
   );
@@ -70,24 +71,37 @@ export function TableView({
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={rows}>
+      <TableBody items={rows} emptyContent={'No rows to display.'}>
         {item => (
           <TableRow key={item.key}>
-            {columnKey =>
-              columnKey === 'actions' ? (
-                <TableCell className="flex items-center justify-end gap-3">
-                  <ViewActions
-                    rowId={item.key}
-                    item={item}
-                    columns={columns}
-                    viewId={viewId}
-                    rowValues={rowValues}
-                  />
+            {columnKey => {
+              if (columnKey === 'actions') {
+                return (
+                  <TableCell className="flex items-center justify-end gap-3">
+                    <ViewActions
+                      rowId={item.key}
+                      item={item}
+                      columns={columns}
+                      viewId={viewId}
+                      rowValues={rowValues}
+                    />
+                  </TableCell>
+                );
+              }
+
+              const column = extendedColumns.find(col => col.key === columnKey);
+              const value = getKeyValue(item, columnKey);
+
+              return (
+                <TableCell>
+                  {column?.dataType === 'select' && value ? (
+                    <Chip variant="flat">{value}</Chip>
+                  ) : (
+                    value
+                  )}
                 </TableCell>
-              ) : (
-                <TableCell>{getKeyValue(item, columnKey)}</TableCell>
-              )
-            }
+              );
+            }}
           </TableRow>
         )}
       </TableBody>

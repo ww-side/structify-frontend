@@ -77,7 +77,6 @@ export function EditView({
       onSubmit={e => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('submit');
         handleSubmit().catch(console.error);
       }}
     >
