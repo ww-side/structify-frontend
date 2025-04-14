@@ -8,17 +8,18 @@ body {
 
 :root {
   --primary-text-color: #000000;
-  --inverted-text-color: #FFFFFF;
+  --inverted-text-color: #ffffff;
 
   --primary-color: #7c5e91;
+  --secondary-color: #e5dfe9;
   --primary-border-color: #7c5e91;
   --secondary-color: #ffffff;
 
   --bg-noise: url('/light-noise.png');
 }
 
-[data-theme="dark"] {
-  --primary-text-color: #FFFFFF;
+[data-theme='dark'] {
+  --primary-text-color: #ffffff;
   --inverted-text-color: #000000;
 
   --secondary-color: #131313;

@@ -9,6 +9,7 @@ import { AuthGuard } from '@/core/auth/components/auth-guard';
 import { ToastProvider } from '@/shared/lib/toast';
 import { cn } from '@/shared/lib/utils';
 import { Dialog } from '@/shared/ui/kit/dialog';
+import { Drawer } from '@/shared/ui/kit/drawer';
 
 import './globals.css';
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           <HeroUIProvider>
             <AuthGuard>{children}</AuthGuard>
             <Dialog />
+            <Drawer />
           </HeroUIProvider>
         </ApolloProvider>
       </body>
