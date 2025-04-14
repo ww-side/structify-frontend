@@ -12,7 +12,12 @@ export function WidgetLayout({
   className?: string;
 }) {
   return (
-    <section className={cn('border w-max rounded-xl p-4', className)}>
+    <section
+      className={cn(
+        'border w-max rounded-xl border-stroke-color p-4',
+        className,
+      )}
+    >
       {children}
     </section>
   );

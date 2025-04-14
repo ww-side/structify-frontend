@@ -12,6 +12,7 @@ body {
 
   --primary-color: #7c5e91;
   --secondary-color: #e5dfe9;
+  --stroke-color: #e5e7eb;
   --primary-border-color: #7c5e91;
   --secondary-color: #ffffff;
 
@@ -20,9 +21,15 @@ body {
 
 [data-theme='dark'] {
   --primary-text-color: #ffffff;
+  --primary-color: #400269;
   --inverted-text-color: #000000;
+  --stroke-color: #373737;
 
   --secondary-color: #131313;
 
   --bg-noise: url('/dark-noise.png');
+
+  .rbc-off-range-bg {
+    background-color: #373737;
+  }
 }

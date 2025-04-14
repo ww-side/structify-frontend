@@ -1,3 +1,12 @@
+import { UserSettings } from '@/core/user/components';
+
+import { UserSettingsInfo } from '@/widgets/settings';
+
 export default function Settings() {
-  return <main>Settings</main>;
+  return (
+    <>
+      <UserSettingsInfo />
+      <UserSettings />
+    </>
+  );
 }

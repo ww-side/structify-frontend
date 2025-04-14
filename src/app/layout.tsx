@@ -1,6 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import type { Metadata } from 'next';
 import { Titillium_Web } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
 import { HeroUIProvider } from '@heroui/system';
 
 import { ApolloProvider } from '@/core/api/apollo-provider';
@@ -31,15 +32,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn(titilliumWeb.variable, 'antialiased bg-noise')}>
         <ApolloProvider>
           <Toaster position="bottom-right" />
           <ToastProvider placement="bottom-right" />
           <HeroUIProvider>
-            <AuthGuard>{children}</AuthGuard>
-            <Dialog />
-            <Drawer />
+            <ThemeProvider defaultTheme="light" enableSystem>
+              <AuthGuard>{children}</AuthGuard>
+              <Dialog />
+              <Drawer />
+            </ThemeProvider>
           </HeroUIProvider>
         </ApolloProvider>
       </body>

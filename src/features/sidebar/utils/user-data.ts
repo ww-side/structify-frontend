@@ -10,9 +10,11 @@ export async function getUserHandler(setUser: (user: UserEntity) => void) {
 
 export function userDataMapping(user: UserEntity | null) {
   const firstName = user?.firstName;
+  const lastName = user?.lastName;
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
   const username = user?.username;
   return {
-    firstName,
+    fullName,
     username,
     initials: firstName
       ? firstName.charAt(0).toUpperCase()

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@apollo/client';
 
+import { ThemeSwitcher } from '@/core/theme/components';
 import { logout, useUserStore } from '@/core/user/services';
 
 import { ViewInfo } from '@/features/sidebar/components/view-info';
@@ -15,7 +16,7 @@ import { Skeleton } from '@/shared/ui/kit/skeleton';
 import { Text } from '@/shared/ui/kit/text';
 import { Title } from '@/shared/ui/kit/title';
 
-import { UserInfo } from './user-info';
+import { UserInfo } from '../../../core/user/components/user-info';
 
 const skeletons = Array.from({ length: 5 }, (_, i) => (
   <Skeleton key={i} width={150} height={20} />
@@ -41,10 +42,11 @@ export function SidebarMenu() {
 
   return (
     <section className="w-[250px] h-[96.4vh] sticky flex flex-col gap-3">
-      <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
+      <section className="p-3 flex items-center justify-between bg-secondary rounded-2xl text-primary-text border border-stroke-color">
         <UserInfo />
+        <ThemeSwitcher />
       </section>
-      <section className="p-3 bg-secondary rounded-2xl text-primary-text border">
+      <section className="p-3 bg-secondary rounded-2xl text-primary-text border border-stroke-color">
         <Link href="/views">
           <Title level={5}>Views</Title>
         </Link>
@@ -56,17 +58,20 @@ export function SidebarMenu() {
       </section>
       <Link
         href="/calendar"
-        className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border"
+        className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border border-stroke-color"
       >
         <CalendarDays size="14" />
         <Text weight="semibold">Calendar</Text>
       </Link>
-      <button className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border">
+      <Link
+        href="/settings"
+        className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border border-stroke-color"
+      >
         <Settings size="14" />
         <Text weight="semibold">Settings</Text>
-      </button>
+      </Link>
       <button
-        className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border"
+        className="p-3 bg-secondary rounded-2xl flex items-center gap-3 border border-stroke-color"
         onClick={logoutHandler}
       >
         <HeartCrack size={14} />
