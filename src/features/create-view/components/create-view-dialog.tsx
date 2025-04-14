@@ -24,7 +24,7 @@ export function CreateViewDialog() {
       size="sm"
       variant="solid"
       color="primary"
-      onClick={openDialogHandler}
+      onPress={openDialogHandler}
       className="flex items-center gap-2"
     >
       <Hammer size="14" />
