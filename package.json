@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "pnpm": {
+    "overrides": {
+      "@internationalized/date": "3.6.0"
+    }
+  },
   "dependencies": {
     "@apollo/client": "^3.13.1",
     "@apollo/experimental-nextjs-app-support": "^0.11.9",
@@ -15,6 +20,8 @@
     "@heroui/breadcrumbs": "^2.2.12",
     "@heroui/button": "^2.2.13",
     "@heroui/chip": "^2.2.12",
+    "@heroui/date-picker": "^2.3.17",
+    "@heroui/drawer": "^2.2.14",
     "@heroui/dropdown": "^2.3.16",
     "@heroui/form": "^2.1.12",
     "@heroui/input": "^2.4.13",
@@ -27,16 +34,19 @@
     "@heroui/toast": "^2.0.6",
     "@heroui/tooltip": "^2.2.13",
     "@heroui/user": "^2.2.10",
+    "@internationalized/date": "3.6.0",
     "@tanstack/form-core": "^0.43.2",
     "@tanstack/react-form": "^0.43.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cookies-next": "^5.1.0",
+    "dayjs": "^1.11.13",
     "framer-motion": "^12.4.7",
     "graphql-tag": "^2.12.6",
     "lucide-react": "^0.475.0",
     "next": "15.1.7",
     "react": "^19.0.0",
+    "react-big-calendar": "^1.18.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
     "tailwind-merge": "^3.0.1",
@@ -48,6 +58,7 @@
     "@next/eslint-plugin-next": "^15.1.7",
     "@types/node": "^20",
     "@types/react": "^19",
+    "@types/react-big-calendar": "^1.16.1",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
