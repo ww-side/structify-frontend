@@ -15,6 +15,7 @@ export default {
         secondary: 'var(--secondary-color)',
         'primary-text': 'var(--primary-text-color)',
         'inverted-text': 'var(--inverted-text-color)',
+        'stroke-color': 'var(--stroke-color)',
       },
       backgroundImage: {
         noise: 'var(--bg-noise)',

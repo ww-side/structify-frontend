@@ -4,9 +4,12 @@ import { useEffect } from 'react';
 
 import { useUserStore } from '@/core/user/services';
 
-import { User } from '@/shared/ui/kit/user';
+import {
+  getUserHandler,
+  userDataMapping,
+} from '@/features/sidebar/utils/user-data';
 
-import { getUserHandler, userDataMapping } from '../utils/user-data';
+import { User } from '@/shared/ui/kit/user';
 
 export function UserInfo() {
   const { user, setUser } = useUserStore();
@@ -15,11 +18,11 @@ export function UserInfo() {
     getUserHandler(setUser).catch(console.error);
   }, [setUser]);
 
-  const { firstName, username, initials } = userDataMapping(user);
+  const { fullName, username, initials } = userDataMapping(user);
 
   return (
     <User
-      name={firstName ?? username}
+      name={fullName ?? username}
       avatarProps={{ name: initials, size: 'sm', color: 'primary' }}
     />
   );

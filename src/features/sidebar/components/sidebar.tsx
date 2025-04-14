@@ -8,7 +8,7 @@ export function Sidebar({ children }: { children: ReactNode }) {
   return (
     <div className="flex gap-4 p-4">
       <SidebarMenu />
-      <main className="bg-secondary w-full rounded-2xl p-4 border">
+      <main className="bg-secondary w-full rounded-2xl py-4 px-8 border border-stroke-color">
         {children}
       </main>
     </div>
