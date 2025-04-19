@@ -1,8 +1,8 @@
 'use client';
 
 import { useCallback, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 
-import { ColumnEditDialog } from '@/features/columns/components';
 import type { Column } from '@/features/columns/lib';
 import type { RowValue } from '@/features/row-value/lib';
 
@@ -20,6 +20,14 @@ import {
 } from '@/shared/ui/kit/table';
 
 import { ViewActions } from './view-actions';
+
+const ColumnEditDialog = dynamic(
+  () =>
+    import('@/features/columns/components').then(mod => mod.ColumnEditDialog),
+  {
+    ssr: false,
+  },
+);
 
 export function TableView({
   columns,
@@ -39,7 +47,13 @@ export function TableView({
   const extendedColumns = useMemo(
     () => [
       ...columns,
-      { id: 'actions', key: 'actions', name: '', dataType: 'text', variants: [] },
+      {
+        id: 'actions',
+        key: 'actions',
+        name: '',
+        dataType: 'text',
+        variants: [],
+      },
     ],
     [columns],
   );

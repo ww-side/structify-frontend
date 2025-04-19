@@ -1,3 +1,5 @@
+import type { OriginColumn } from '@/features/columns/lib';
+
 export const rowsMapping = ({
   rows,
   rowValues,
@@ -5,7 +7,7 @@ export const rowsMapping = ({
 }: {
   rows: Record<string, string>[];
   rowValues: Record<string, string>[];
-  columns: Record<string, string>[];
+  columns: OriginColumn[];
 }) => {
   return rows.map(row => {
     const rowData: Record<string, string> = { key: row.id };

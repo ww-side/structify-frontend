@@ -8,6 +8,8 @@ export function VideoLoop() {
         autoPlay
         loop
         muted
+        preload="none"
+        poster="/video-poster.png"
       >
         <source src="/auth-video.mp4" type="video/mp4" />
       </video>

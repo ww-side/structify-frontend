@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
+import dynamic from 'next/dynamic';
 
 import type { Column } from '@/features/columns/lib';
 import type { RowValue } from '@/features/row-value/lib';
@@ -9,8 +10,18 @@ import { PackageX, Pencil } from '@/shared/ui/icons';
 import { useDialogStore } from '@/shared/ui/kit/dialog';
 import { Tooltip } from '@/shared/ui/kit/tooltip';
 
-import { ConfirmDeleteDialog } from './confirm-delete-dialog';
-import { EditDialog } from './edit-dialog';
+const ConfirmDeleteDialog = dynamic(
+  () => import('./confirm-delete-dialog').then(mod => mod.ConfirmDeleteDialog),
+  {
+    ssr: false,
+  },
+);
+const EditDialog = dynamic(
+  () => import('./edit-dialog').then(mod => mod.EditDialog),
+  {
+    ssr: false,
+  },
+);
 
 export function ViewActions({
   rowId,

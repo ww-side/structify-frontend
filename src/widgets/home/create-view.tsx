@@ -1,9 +1,13 @@
 'use client';
 
-import { CreateViewDialog } from '@/features/create-view/components';
+import dynamic from 'next/dynamic';
 
 import { WidgetLayout } from '@/shared/ui/components/widget-layout';
 import { Text } from '@/shared/ui/kit/text';
+
+const CreateViewDialog = dynamic(() =>
+  import('@/features/create-view/components').then(m => m.CreateViewDialog),
+);
 
 export function CreateView() {
   return (

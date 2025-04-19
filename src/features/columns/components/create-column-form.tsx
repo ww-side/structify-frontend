@@ -41,6 +41,7 @@ export function CreateColumnForm({
           dataType: res.dataType,
           id: res.id,
           key: res.name,
+          variants: [],
         });
         notifySuccess(`Column ${data.value.name} created`);
         onClose?.();

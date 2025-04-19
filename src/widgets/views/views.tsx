@@ -1,8 +1,12 @@
 'use client';
 
-import { ViewsList } from '@/features/view/components';
+import dynamic from 'next/dynamic';
 
 import { Title } from '@/shared/ui/kit/title';
+
+const ViewsList = dynamic(() =>
+  import('@/features/view/components').then(mod => mod.ViewsList),
+);
 
 export function Views() {
   return (

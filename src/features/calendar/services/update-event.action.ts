@@ -2,6 +2,8 @@
 
 import { cookies } from 'next/headers';
 
+import { secureFetch } from '@/shared/lib/network';
+
 import type { CalendarEventDef } from '../lib';
 
 export async function updateEvent(
@@ -10,14 +12,17 @@ export async function updateEvent(
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
 
-  const res = await fetch(`${process.env.SERVER_URL}/calendar/${args.id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+  const res = await secureFetch(
+    `${process.env.SERVER_URL}/calendar/${args.id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(args),
     },
-    body: JSON.stringify(args),
-  });
+  );
   const result = await res.json();
 
   return {
