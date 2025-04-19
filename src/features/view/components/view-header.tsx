@@ -1,7 +1,18 @@
 'use client';
 
-import { ViewHeaderActions } from './view-header-actions';
+import dynamic from 'next/dynamic';
+
+import { Skeleton } from '@/shared/ui/kit/skeleton';
+
 import { ViewTitle } from './view-title';
+
+const ViewHeaderActions = dynamic(
+  () => import('./view-header-actions').then(m => m.ViewHeaderActions),
+  {
+    ssr: false,
+    loading: () => <Skeleton width={240} height={23} />,
+  },
+);
 
 export function ViewHeader({ viewId }: { viewId: string }) {
   return (
