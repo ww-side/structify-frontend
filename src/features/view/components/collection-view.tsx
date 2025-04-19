@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
 import type { Column } from '@/features/columns/lib';
@@ -12,11 +13,19 @@ import type { RowValue } from '@/features/row-value/lib';
 import { initializeRows, useRowsStore } from '@/features/rows/services';
 import { useViewFormatStore } from '@/features/view/services';
 
-import { Pagination } from '@/shared/ui/kit/pagination';
+import { Skeleton } from '@/shared/ui/kit/skeleton';
 
 import { PageSizeDropdown } from './page-size-dropdown';
 import { TableView } from './table-view';
 import { ViewHeader } from './view-header';
+
+const Pagination = dynamic(
+  () => import('@/shared/ui/kit/pagination').then(mod => mod.Pagination),
+  {
+    ssr: false,
+    loading: () => <Skeleton width={160} height={32} />,
+  },
+);
 
 export function CollectionView({
   viewId,

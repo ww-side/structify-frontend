@@ -1,14 +1,18 @@
 'use client';
 
 import { useCallback } from 'react';
+import dynamic from 'next/dynamic';
 
-import { CreateColumnForm } from '@/features/columns/components';
 import { createNewRow } from '@/features/rows/services';
 
 import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
 import { Columns2, Rows2 } from '@/shared/ui/icons';
 import { Button } from '@/shared/ui/kit/button';
 import { useDialogStore } from '@/shared/ui/kit/dialog';
+
+const CreateColumnForm = dynamic(() =>
+  import('@/features/columns/components').then(mod => mod.CreateColumnForm),
+);
 
 export function ViewHeaderActions({ viewId }: { viewId: string }) {
   const { open, registerContent, close } = useDialogStore();

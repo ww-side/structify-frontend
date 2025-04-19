@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build",
+    "analyze:dev": "ANALYZE=true next dev"
   },
   "pnpm": {
     "overrides": {
@@ -57,6 +59,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.3.1",
     "@next/eslint-plugin-next": "^15.1.7",
     "@types/node": "^20",
     "@types/react": "^19",
