@@ -1,6 +1,6 @@
-import type { Column } from './types';
+import type { Column, OriginColumn } from './types';
 
-export const columnsMapping = (columns: Record<string, string>[]): Column[] => {
+export const columnsMapping = (columns: OriginColumn[]): Column[] => {
   return columns.map(column => ({
     id: column.id,
     key: column.name.toLowerCase(),

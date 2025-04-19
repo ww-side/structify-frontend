@@ -2,6 +2,8 @@
 
 import { cookies } from 'next/headers';
 
+import { secureFetch } from '@/shared/lib/network';
+
 export async function createRowValue(args: {
   value: string;
   columnId: string;
@@ -11,7 +13,7 @@ export async function createRowValue(args: {
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
 
-  const res = await fetch(`${process.env.SERVER_URL}/row-value/`, {
+  const res = await secureFetch(`${process.env.SERVER_URL}/row-value/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

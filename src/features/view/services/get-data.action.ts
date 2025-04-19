@@ -2,12 +2,15 @@
 
 import { cookies } from 'next/headers';
 
+import type { OriginColumn } from '@/features/columns/lib';
 import type { RowValue } from '@/features/row-value/lib';
+
+import { secureFetch } from '@/shared/lib/network';
 
 type GetDataResponse = {
   statusCode: number;
   data: {
-    columns: Record<string, string>[];
+    columns: OriginColumn[];
     rows: Record<string, string>[];
     rowValues: RowValue[];
     count: number;
@@ -30,7 +33,7 @@ export async function getData({
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
 
-  const res = await fetch(
+  const res = await secureFetch(
     `${process.env.SERVER_URL}/view-data/?viewId=${id}&page=${page}&page_size=${pageSize}`,
     {
       headers: {

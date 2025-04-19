@@ -2,6 +2,8 @@
 
 import { cookies } from 'next/headers';
 
+import { secureFetch } from '@/shared/lib/network';
+
 type CreateColumnReponse = {
   statusCode: number;
   data: {
@@ -23,7 +25,7 @@ export async function createColumn(args: {
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
 
-  const res = await fetch(`${process.env.SERVER_URL}/column/`, {
+  const res = await secureFetch(`${process.env.SERVER_URL}/column/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

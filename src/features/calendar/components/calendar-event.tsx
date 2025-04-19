@@ -1,10 +1,8 @@
 'use client';
 
-import { Tooltip } from '@heroui/tooltip';
 import dayjs from 'dayjs';
 
 import { CalendarClock, MapPin, NotebookPen } from '@/shared/ui/icons';
-import { Button } from '@/shared/ui/kit/button';
 import { Text } from '@/shared/ui/kit/text';
 import { Title } from '@/shared/ui/kit/title';
 
@@ -48,27 +46,6 @@ export function CalendarEvent({
         <Text>Notes:</Text>
         <Text weight="semibold">{notes}</Text>
       </section>
-    </section>
-  );
-}
-
-export function CalendarEventFooter({
-  onEdit,
-  onDelete,
-}: {
-  onEdit: () => void;
-  onDelete: () => void;
-}) {
-  return (
-    <section className="flex w-full items-center gap-5 mt-5">
-      <Tooltip color="danger" content="This action cannot be undone.">
-        <Button color="danger" onPress={onDelete} fullWidth>
-          Delete
-        </Button>
-      </Tooltip>
-      <Button color="primary" onPress={onEdit} fullWidth>
-        Edit
-      </Button>
     </section>
   );
 }

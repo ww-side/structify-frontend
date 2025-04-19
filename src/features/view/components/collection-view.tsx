@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Pagination } from '@heroui/pagination';
 
 import type { Column } from '@/features/columns/lib';
 import {
@@ -12,6 +11,8 @@ import {
 import type { RowValue } from '@/features/row-value/lib';
 import { initializeRows, useRowsStore } from '@/features/rows/services';
 import { useViewFormatStore } from '@/features/view/services';
+
+import { Pagination } from '@/shared/ui/kit/pagination';
 
 import { PageSizeDropdown } from './page-size-dropdown';
 import { TableView } from './table-view';

@@ -1,8 +1,11 @@
 'use client';
 
 import { type ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 
-import { SidebarMenu } from './sidebar-menu';
+const SidebarMenu = dynamic(() =>
+  import('./sidebar-menu').then(m => m.SidebarMenu),
+);
 
 export function Sidebar({ children }: { children: ReactNode }) {
   return (

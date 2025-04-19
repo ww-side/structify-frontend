@@ -3,18 +3,32 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import type { DateLocalizer } from 'react-big-calendar';
 import { Calendar, dayjsLocalizer } from 'react-big-calendar';
+import dynamic from 'next/dynamic';
 import dayjs from 'dayjs';
 
 import { notifyDanger, notifySuccess } from '@/shared/lib/toast';
 import { cn } from '@/shared/lib/utils';
 import { useDrawerStore } from '@/shared/ui/kit/drawer';
+import { Skeleton } from '@/shared/ui/kit/skeleton';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import type { CalendarEventDef } from '../lib';
 import { deleteEvent, initEvents, useCalendarStore } from '../services';
-import { CalendarEvent, CalendarEventFooter } from './calendar-event';
-import { EventForm } from './event-form';
+import { CalendarEventLoading } from './calendar-event-loading';
+import { EventFormLoading } from './event-form-loading';
 
+const EventForm = dynamic(() => import('./event-form').then(m => m.EventForm), {
+  ssr: false,
+  loading: () => <EventFormLoading />,
+});
+const CalendarEvent = dynamic(
+  () => import('./calendar-event').then(m => m.CalendarEvent),
+  { ssr: false, loading: () => <CalendarEventLoading /> },
+);
+const CalendarEventFooter = dynamic(
+  () => import('./calendar-event-footer').then(m => m.CalendarEventFooter),
+  { ssr: false, loading: () => <Skeleton width="full" height={40} /> },
+);
 const localizer = dayjsLocalizer(dayjs);
 
 export function CalendarView({ events }: { events: CalendarEventDef[] }) {

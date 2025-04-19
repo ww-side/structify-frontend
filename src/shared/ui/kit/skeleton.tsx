@@ -5,13 +5,16 @@ export function Skeleton({
   width = 200,
 }: {
   height?: number;
-  width?: number;
+  width?: number | 'full';
 }) {
   return (
     <div className="animate-pulse">
       <div
         className="bg-gray-200 rounded-xl"
-        style={{ width: `${width}px`, height: `${height}px` }}
+        style={{
+          width: typeof width === 'number' ? `${width}px` : '100%',
+          height: `${height}px`,
+        }}
       />
     </div>
   );

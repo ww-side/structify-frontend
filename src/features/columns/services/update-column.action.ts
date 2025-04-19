@@ -2,6 +2,8 @@
 
 import { cookies } from 'next/headers';
 
+import { secureFetch } from '@/shared/lib/network';
+
 export async function updateColumn({
   id,
   name,
@@ -14,7 +16,7 @@ export async function updateColumn({
   const cookiesImp = await cookies();
   const token = cookiesImp.get('accessToken')?.value;
 
-  const res = await fetch(`${process.env.SERVER_URL}/column/${id}`, {
+  const res = await secureFetch(`${process.env.SERVER_URL}/column/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

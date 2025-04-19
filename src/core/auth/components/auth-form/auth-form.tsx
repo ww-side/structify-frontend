@@ -1,13 +1,32 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 
-import { Logo } from '@/shared/ui/components/logo';
+import { Skeleton } from '@/shared/ui/kit/skeleton';
 import { Text } from '@/shared/ui/kit/text';
 import { Title } from '@/shared/ui/kit/title';
 
-import { SignInForm } from './sign-in-form';
-import { SignUpForm } from './sign-up-form';
+import { AuthLoading } from './auth-loading';
+
+const Logo = dynamic(
+  () => import('@/shared/ui/components/logo').then(m => m.Logo),
+  {
+    loading: () => <Skeleton width={169} height={45} />,
+  },
+);
+const SignInForm = dynamic(
+  () => import('./sign-in-form').then(m => m.SignInForm),
+  {
+    loading: () => <AuthLoading />,
+  },
+);
+const SignUpForm = dynamic(
+  () => import('./sign-up-form').then(m => m.SignUpForm),
+  {
+    loading: () => <AuthLoading rows={6} />,
+  },
+);
 
 export function AuthForm() {
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
